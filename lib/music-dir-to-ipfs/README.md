@@ -2,7 +2,19 @@
 
 add a directory of music to ipfs.
 
-creates a `tracks.json` list with the ID3 tags, and IPFS hashes, for each file.
+creates a `tracks.json` file with the form:
+
+```js
+{
+  "album": "album name",
+  "artist": "artist name",
+  "picture": /* some image buffer... /*,
+  "tracks": [
+    {title, ipfsHash, album, artist, disk, /*...*/ },
+    /* ... more songs ... */
+  ]
+}
+```
 adds this file to the directory of music,
 then adds the entire directory to IPFS
 
