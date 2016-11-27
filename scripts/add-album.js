@@ -2,39 +2,26 @@ const ipfsAPI = require('ipfs-api')
 const ipfs = ipfsAPI()
 const streamToString = require('stream-to-string')
 const sqlite = require('sqlite3');
-var db = new sqlite.Database('library.db')
+const albumMetadata = require('../lib/album-metadata.js')
+const argv = require('minimist')(process.argv.slice(2), {
+  default: {
+    db: 'library.db'
+  }
+});
 
+const db = new sqlite.Database(argv.db)
 
 function getHash(ipfsNode) {
 	const tracksLink = ipfsNode.links.filter(function(link) {
 			return link.name == 'tracks.json'
 		})[0]
-	return tracksLink.toJSON().multihash
-}
-
-// returns 1 album name for all the tracks
-// or throws an error
-function albumName (tracks) {
-  const albums = tracks.reduce(function (acc, cur) {
-    if (!acc)
-      return cur.album
-    if (acc !== cur.album)
-      throw 'Not all albums match!'
-    return acc
-  }, null)
-  return albums
-}
-
-function albumMetadata (tracks) {
-  return {
-    artist: tracks[0].artist[0],
-    album: albumName(tracks),
-  }
+  if (tracksLink)
+    return tracksLink.toJSON().multihash
 }
 
 let tracksHash;
 
-ipfs.object.get(process.argv[2])
+ipfs.object.get(argv._[0])
 	.then((ipfsNode) => {
 		tracksHash = getHash(ipfsNode)
 		return tracksHash;
@@ -49,3 +36,6 @@ ipfs.object.get(process.argv[2])
     	 VALUES ("${albums.album}", "${albums.artist}", "${tracksHash}");`
   	);
 	})
+  .catch(function(e) {
+    console.log("Error fetching hash: " + argv._[0])
+  })
