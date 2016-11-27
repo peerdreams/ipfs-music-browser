@@ -19,13 +19,8 @@ function getHash(ipfsNode) {
     return tracksLink.toJSON().multihash
 }
 
-let tracksHash;
-
 ipfs.object.get(argv._[0])
-	.then((ipfsNode) => {
-		tracksHash = getHash(ipfsNode)
-		return tracksHash;
-	})
+	.then((ipfsNode) => getHash(ipfsNode))
 	.then((hash) => ipfs.get(hash))
 	.then((stream) => streamToString(stream.read().content))
 	.then((string) => {
@@ -33,7 +28,7 @@ ipfs.object.get(argv._[0])
 		let albums = albumMetadata(tracks)
     db.run(
     	`INSERT INTO albums (album, artist, ipfs_hash) 
-    	 VALUES ("${albums.album}", "${albums.artist}", "${tracksHash}");`
+    	 VALUES ("${albums.album}", "${albums.artist}", "${argv._[0]}");`
   	);
 	})
   .catch(function(e) {
