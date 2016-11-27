@@ -29,14 +29,13 @@ test('should get list of albums on /', t => {
  })
 })
 
-test('should find queries on /search', t => {
- let artist = 'Anderson .Paak'
+test('should find 1 result on /search?artist=Paak', t => {
+ let artist = 'Paak'
  request.get(`${addr}/search?artist=${artist}`, 
    { json:true }, 
    function (err, res, body) {
       t.notOk(err,err,
         'no errors')
-console.log(body)
       t.equals(body.length, 1,
         'found exactly 1 result when searching for ' + artist)
       t.deepEquals(body[0].artist, 'Anderson .Paak',
