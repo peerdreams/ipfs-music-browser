@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "add-library-ipns": "ipfs add -q library.db | ipfs name publish"
   },
   "author": "",
   "license": "BSD-3-Clause",

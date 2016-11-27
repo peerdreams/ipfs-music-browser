@@ -39,6 +39,13 @@ And go to http://localhost:3000.
 
 Feel free to add more music + refresh. It should show up there!
 
+To backup your library to IPNS,
+
+```sh
+npm run add-library-ipns
+# > Published to [mutable ipns address] : [ipns content address]
+```
+
 ## license
 
 BSD
