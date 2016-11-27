@@ -35,8 +35,8 @@ let db = new sqlite.Database(argv.db)
 
 function add (hash, album, cb) {
   let query =
-      `INSERT INTO albums (album, artist, ipfs_hash)
-  VALUES ("${album.album}", "${album.artist}", "${argv._[0]}");`
+      `INSERT INTO albums (album, artist, ipfsHash)
+  VALUES ("${album.album}", "${album.artist}", "${hash}");`
   db.run(query, cb)
 }
 
@@ -51,7 +51,9 @@ addMusicFolder(ipfs, uploadDir, (err, hash, album) => {
   if (err) throw err
   else add(hash, album, function (err, res) {
     if (err) throw err
-    console.log('added', album.album, hash)
+    console.log(`added
+${album.artist} - ${album.album}
+${hash}`)
   })
 })
 

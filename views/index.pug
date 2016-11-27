@@ -1,0 +1,8 @@
+html
+  head
+    title= title
+  body
+    ul
+      each item in albums
+        li
+          a(href='http://localhost:8080/ipfs/'+item.ipfsHash)= item.artist + ' - ' + item.album
