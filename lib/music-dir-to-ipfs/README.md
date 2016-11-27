@@ -36,15 +36,17 @@ if you npm install this package from the git repo,
 
 `dir` is a **full path** to a directory filled with music. if other stuff is in the directory, that's ok - as long as some of the files there have ID3 tags (mp3, m4a, ogg, wmv, wva).
 
+`cb` calls back on `(err, ipfsHash, albumMetadata)`
+
 full example:
 
 ```js
 var metadata = require('music-dir-to-ipfs')
 var ipfsAPI = require('ipfs-api')
 var ipfs = ipfsAPI('localhost', 5001, { protocol: 'http' }) 
-metadata(ipfs, dir, (err, res) => {
+metadata(ipfs, dir, (err, hash, album) => {
   if (err) throw err
-  else console.log(res)
+  else console.log(hash, album)
 })
 ```
 
