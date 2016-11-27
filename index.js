@@ -6,22 +6,36 @@ app.set('view engine', 'pug')
 
 var db = new sqlite3.Database('library.db')
 
+function searchArtist (artist, cb) {
+  let q = `SELECT * FROM albums WHERE artist LIKE '%${artist}%';`
+  db.all(q,  cb)
+}
+
 function getAlbums(cb) {
-  db.all("SELECT * FROM albums;", function(err, rows) {
-  	cb(rows)
-  })
+  db.all(`SELECT * FROM albums;`, cb)
 }
 
 app.get('/', function (req, res) {
-	getAlbums((albums) => {
-		res.render('index', { albums: albums })
-	})
+  getAlbums((err, as) => res.json(as))
 })
 
-app.get('/albums', function (req, res) {
-	getAlbums((rows) => res.json(rows))
+// TODO 
+app.get('/search', function (req, res) {
+  let q = req.query
+  if (q.artist) {
+    searchArtist(q.artist, (err, as) => {
+      res.json(as)
+    })
+  }
+  else
+    res.json([])
 })
 
-app.listen(3000, function () {
-  console.log('Listening on port 3000.')
-})
+function run (port, cb) {
+  let server = app.listen(port, function (err) {
+    if (err) throw err
+    cb(server)
+  })
+}
+
+module.exports = run
