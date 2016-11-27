@@ -15,6 +15,8 @@ sqlite3
 
 Now ctrl-c to get out of there, and try adding some music:
 
+**NOTE**: you'll have to do a separate npm install in `lib/music-dir-to-ipfs` for now. will fix. 
+
 ```sh 
 $ ./scripts/cmd.js --db=library.db ~/Music/Aim\ -\ Cold\ Water\ Music\ -\ 1999\ \(CD\ MP3\ V0\) 
 added
