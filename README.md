@@ -4,18 +4,23 @@ Better name forthcoming.  Browser for music files and metadata stored in IPFS.
 
 ## quickstart
 
-first, copy and paste the contents of `schema.sql`, then
+you have two options: you can fetch your existing library:
+
+```
+ipfs get [ipns address] -o library.db
+```
+
+or, you can create a new one from scratch:
 
 ```
 npm i
 sqlite3
 >.open library.db
-> [paste contents of schema.sql ]
+> [ paste contents of schema.sql ]
 ```
 
 Now ctrl-c to get out of there, and try adding some music:
-
-**NOTE**: you'll have to do a separate npm install in `lib/music-dir-to-ipfs` for now. will fix. 
+**NOTE**: you'll have to do a separate npm install in `lib/music-dir-to-ipfs` for now, will fix. 
 
 ```sh 
 $ ./scripts/cmd.js --db=library.db ~/Music/Aim\ -\ Cold\ Water\ Music\ -\ 1999\ \(CD\ MP3\ V0\) 
