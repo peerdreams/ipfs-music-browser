@@ -20,14 +20,19 @@ then adds the entire directory to IPFS
 
 **NOTE** - make sure IPFS daemon is running - `ipfs daemon`
 
-## quickstart
 
-run IPFS daemon, 
-clone this repo, and 
+## example
 
-```
-npm i
-./cmd.js /cmd.js test/example-music-dir/ --ipfsPort=5001
+run IPFS daemon, and
+
+```js
+var metadata = require('music-dir-to-ipfs')
+var ipfsAPI = require('ipfs-api')
+var ipfs = ipfsAPI('localhost', 5001, { protocol: 'http' }) 
+metadata(ipfs, dir, (err, hash, album) => {
+  if (err) throw err
+  else console.log(hash, album)
+})
 ```
 
 you'll see an IPFS hash come up.
@@ -38,7 +43,7 @@ notice the `tracks.json` file, which should have a list of metadata, and IPFS ha
 
 if your IPFS daemon is running on a different HTTP port on localhost, you can set that port with `--ipfsPort` (5001 is default, so you can omit this option if you just ran `ipfs daemon`)
 
-## programmatic use
+## api
 
 if you npm install this package from the git repo,
 
@@ -50,16 +55,12 @@ if you npm install this package from the git repo,
 
 `cb` calls back on `(err, ipfsHash, albumMetadata)`
 
-full example:
+## install
 
-```js
-var metadata = require('music-dir-to-ipfs')
-var ipfsAPI = require('ipfs-api')
-var ipfs = ipfsAPI('localhost', 5001, { protocol: 'http' }) 
-metadata(ipfs, dir, (err, hash, album) => {
-  if (err) throw err
-  else console.log(hash, album)
-})
+clone this repo and 
+
+```
+npm i
 ```
 
 ## license
