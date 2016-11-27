@@ -8,7 +8,7 @@ creates a `tracks.json` file with the form:
 {
   "album": "album name",
   "artist": "artist name",
-  "picture": /* some image buffer... /*,
+  "picture": /* some image buffer... */,
   "tracks": [
     {title, ipfsHash, album, artist, disk, /*...*/ },
     /* ... more songs ... */
