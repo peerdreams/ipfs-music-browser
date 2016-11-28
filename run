@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+let argv = require('minimist')(process.argv.slice(2), {
+  default: {
+    port: 3000,
+    ipfsPort: 5001,
+    //db: 'library.db'
+  }
+})
+
+let app = require('.')
+app(argv.port, function (s) {
+  console.log('running on', argv.port)
+})

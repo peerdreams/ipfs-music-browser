@@ -15,7 +15,13 @@ function getAlbums(cb) {
   db.all(`SELECT * FROM albums;`, cb)
 }
 
+// HACK generate some static html for now
 app.get('/', function (req, res) {
+  getAlbums((err, as) => 
+    res.render('index', { albums: as }))
+})
+
+app.get('/feed', function (req, res) {
   getAlbums((err, as) => res.json(as))
 })
 

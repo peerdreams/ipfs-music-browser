@@ -12,8 +12,8 @@ test('should be able to start server', t => {
   })
 })
 
-test('should get list of albums on /', t => {
- request.get(addr, {json:true}, function (err, res, body) {
+test('should get list of albums on /feed', t => {
+ request.get(`${addr}/feed`, {json:true}, function (err, res, body) {
   t.notOk(err,err,
     'no errors')
   t.ok(body.length,
@@ -42,6 +42,14 @@ test('should find 1 result on /search?artist=Paak', t => {
         'found the Anderson .Paak album')
       t.end()
    })
+})
+
+test('TODO should find 1 result on /search?album=Malib', t => {
+  t.end()
+})
+
+test('TODO should find 1 result on /search?album=M&artist=Paak', t => {
+  t.end()
 })
 
 test.onFinish(_ => server.close())
