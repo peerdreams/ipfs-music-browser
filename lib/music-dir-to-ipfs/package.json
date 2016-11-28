@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "install": "^0.8.2",
-    "ipfs-api": "^12.0.0",
+    "ipfs-api": "^12.0.1",
     "kefir": "^3.6.0",
     "minimist": "^1.2.0",
     "musicmetadata": "^2.0.5",
